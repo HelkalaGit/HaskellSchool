@@ -29,12 +29,12 @@ version :: Version
 version = Version [0,1,0,0] []
 bindir, libdir, dynlibdir, datadir, libexecdir, sysconfdir :: FilePath
 
-bindir     = "/home/joel/Documents/asteroid/.stack-work/install/x86_64-linux/c88fa5c4f87d3f90f9d303b8c3692985b88266e0bae106b3033dbb6744264400/8.0.2/bin"
-libdir     = "/home/joel/Documents/asteroid/.stack-work/install/x86_64-linux/c88fa5c4f87d3f90f9d303b8c3692985b88266e0bae106b3033dbb6744264400/8.0.2/lib/x86_64-linux-ghc-8.0.2/asteroid-0.1.0.0"
-dynlibdir  = "/home/joel/Documents/asteroid/.stack-work/install/x86_64-linux/c88fa5c4f87d3f90f9d303b8c3692985b88266e0bae106b3033dbb6744264400/8.0.2/lib/x86_64-linux-ghc-8.0.2"
-datadir    = "/home/joel/Documents/asteroid/.stack-work/install/x86_64-linux/c88fa5c4f87d3f90f9d303b8c3692985b88266e0bae106b3033dbb6744264400/8.0.2/share/x86_64-linux-ghc-8.0.2/asteroid-0.1.0.0"
-libexecdir = "/home/joel/Documents/asteroid/.stack-work/install/x86_64-linux/c88fa5c4f87d3f90f9d303b8c3692985b88266e0bae106b3033dbb6744264400/8.0.2/libexec"
-sysconfdir = "/home/joel/Documents/asteroid/.stack-work/install/x86_64-linux/c88fa5c4f87d3f90f9d303b8c3692985b88266e0bae106b3033dbb6744264400/8.0.2/etc"
+bindir     = "/home/joel/Documents/Haskell/HaskellSchool/asteroid/.stack-work/install/x86_64-linux/c88fa5c4f87d3f90f9d303b8c3692985b88266e0bae106b3033dbb6744264400/8.0.2/bin"
+libdir     = "/home/joel/Documents/Haskell/HaskellSchool/asteroid/.stack-work/install/x86_64-linux/c88fa5c4f87d3f90f9d303b8c3692985b88266e0bae106b3033dbb6744264400/8.0.2/lib/x86_64-linux-ghc-8.0.2/asteroid-0.1.0.0"
+dynlibdir  = "/home/joel/Documents/Haskell/HaskellSchool/asteroid/.stack-work/install/x86_64-linux/c88fa5c4f87d3f90f9d303b8c3692985b88266e0bae106b3033dbb6744264400/8.0.2/lib/x86_64-linux-ghc-8.0.2"
+datadir    = "/home/joel/Documents/Haskell/HaskellSchool/asteroid/.stack-work/install/x86_64-linux/c88fa5c4f87d3f90f9d303b8c3692985b88266e0bae106b3033dbb6744264400/8.0.2/share/x86_64-linux-ghc-8.0.2/asteroid-0.1.0.0"
+libexecdir = "/home/joel/Documents/Haskell/HaskellSchool/asteroid/.stack-work/install/x86_64-linux/c88fa5c4f87d3f90f9d303b8c3692985b88266e0bae106b3033dbb6744264400/8.0.2/libexec"
+sysconfdir = "/home/joel/Documents/Haskell/HaskellSchool/asteroid/.stack-work/install/x86_64-linux/c88fa5c4f87d3f90f9d303b8c3692985b88266e0bae106b3033dbb6744264400/8.0.2/etc"
 
 getBinDir, getLibDir, getDynLibDir, getDataDir, getLibexecDir, getSysconfDir :: IO FilePath
 getBinDir = catchIO (getEnv "asteroid_bindir") (\_ -> return bindir)

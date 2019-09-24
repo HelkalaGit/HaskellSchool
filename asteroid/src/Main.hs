@@ -45,7 +45,7 @@ simulateWorld timeStep (Play rocks (Ship shipPos shipV) bullets ufos)
   | otherwise = Play (concatMap updateRock rocks) 
                               (Ship newShipPos shipV)
                               (concat (map updateBullet bullets))
-                              (concatMap updateUfo ufos)
+                              (concatMap updateUfo ufos) -- Ufo simulation
   where
       collidesWith :: PointInSpace -> Rock -> Bool
       collidesWith p (Rock rp s _) 
@@ -76,7 +76,7 @@ simulateWorld timeStep (Play rocks (Ship shipPos shipV) bullets ufos)
 
       updateUfo :: Ufo -> [Ufo]
       updateUfo r@(Ufo p s v)
-             = [Ufo (restoreToScreen (p .+ timeStep .* v)) s v] 
+             = [Ufo (restoreToScreen (p .+ timeStep .* v)) s v] -- Ufo update
 
       newShipPos :: PointInSpace
       newShipPos = restoreToScreen (shipPos .+ timeStep .* shipV)
@@ -102,6 +102,7 @@ drawWorld GameOver
      . color red 
      . text 
      $ "Game Over!"
+     
 
 drawWorld (Play rocks (Ship (x,y) (vx,vy)) bullets ufos)
   = pictures [ship, asteroids, shots, ufo]
@@ -112,17 +113,17 @@ drawWorld (Play rocks (Ship (x,y) (vx,vy)) bullets ufos)
     shots     = pictures [translate x y (color red (circle 2)) 
                          | Bullet (x,y) _ _ <- bullets]
     ufo       = pictures [translate x y (color green (circleSolid s))
-                         | Ufo    (x,y) s _ <- ufos]
+                         | Ufo    (x,y) s _ <- ufos] -- draw Ufo
 
 handleEvents :: Event -> AsteroidWorld -> AsteroidWorld
 
-handleEvents _ GameOver = GameOver
+handleEvents (EventKey (MouseButton LeftButton) Down _ clickPos) GameOver = initialWorld
 
 handleEvents (EventKey (MouseButton LeftButton) Down _ clickPos)
              (Play rocks (Ship shipPos shipVel) bullets ufos)
              = Play rocks (Ship shipPos newVel) 
                           (newBullet : bullets)
-                          ufos
+                          ufos -- Ufo attribute for events
  where 
      newBullet = Bullet shipPos 
                         (negate 150 .* norm (shipPos .- clickPos)) 
@@ -130,6 +131,9 @@ handleEvents (EventKey (MouseButton LeftButton) Down _ clickPos)
      newVel    = shipVel .+ (50 .* norm (shipPos .- clickPos))
 
 handleEvents _ w = w
+
+--restartGame :: AsteroidWorld
+--restartGame Restart = playGame
 
 type PointInSpace = (Float, Float)
 (.-) , (.+) :: PointInSpace -> PointInSpace -> PointInSpace
@@ -156,14 +160,23 @@ limitMag n pt = if (magV pt > n)
 rotateV :: Float -> PointInSpace -> PointInSpace
 rotateV r (x,y) = (x * cos r - y * sin r
                   ,x * sin r + y * cos r)
+playGame =
+ play
+  (InWindow "Asteroids!" (550,550) (20,20))
+  black
+  24
+  initialWorld
+  drawWorld
+  handleEvents
+  simulateWorld
 
-
-main = play 
-         (InWindow "Asteroids!" (550,550) (20,20)) 
-         black 
-         24 
-         initialWorld 
-         drawWorld 
-         handleEvents
-         simulateWorld
+main = -- play 
+        -- (InWindow "Asteroids!" (550,550) (20,20)) 
+        -- black 
+        -- 24 
+        -- initialWorld 
+        -- drawWorld 
+        -- handleEvents
+        -- simulateWorld
+        playGame
 
