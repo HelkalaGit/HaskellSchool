@@ -1,4 +1,6 @@
 module Main where
+-- I didn't know how to do g1 and g3. If i could get some help with those?
+-- 
 
 f1 :: (Int,Char,Bool) -> Char  
 f1 (a,b,c) = b 
