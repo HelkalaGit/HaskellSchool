@@ -46,19 +46,7 @@ mergeAll :: [[Int]] -> [[Int]] -> [[Int]]
 mergeAll [[]] [[]] = [[]]
 mergeAll [[]] b = b
 mergeAll a [[]] = a 
-mergeAll a b = [xs ++ ys | xs <- a, ys <- b] 
-
-merge :: [[Int]] -> [Int] -> [[Int]]
-merge [[]] [] = [[]]
-merge xs [] = xs
-merge [[]] ys = [[]]
-merge (x:xs) ys  = ((x++ys):xs)
-
-lol :: [[Int]] -> [[Int]] -> [[Int]]
---lol [[]] [[]] = []
---lol [[]] (x:xs) = x
---lol (x:xs) [[]] = x
-lol a b  = undefined  
+mergeAll a b = [xs ++ ys | xs <- a, ys <- b]  
 
 threatens :: Queen -> Queen -> Bool
 threatens (a1,a2) (b1,b2)
